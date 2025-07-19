@@ -1,8 +1,7 @@
 import geopandas as gpd
 import pandas as pd 
-import numpy as np 
 from shapely.geometry import Point
-from typing import Optional, Union
+from typing import Optional
 
 def _point_within_geometry(
     lat: float, lng: float, gdf: gpd.GeoDataFrame
