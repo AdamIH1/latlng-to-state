@@ -34,7 +34,7 @@ def lookup_geometry_by_point(
         ValueError: If lat or lng are outside valid ranges.
     """
     geometry_cols = gdf.select_dtypes(include=["geometry"]).columns
-    if not geometry_cols:
+    if geometry_cols.empty:
         raise ValueError(
             "GeoDataFrame must contain at least one geometry column."
         )
@@ -64,6 +64,5 @@ def lookup_geometry_by_point(
             raise ValueError(
                 f"Column '{return_col}' not found in matched geometry row."
                 )
-
 
     return None
