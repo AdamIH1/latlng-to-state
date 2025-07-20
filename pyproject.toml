@@ -1,6 +1,6 @@
 [project]
 name = "latlng_to_state"
-version = "0.0.1dev"
+dynamic = ["version"]
 description = "Convert latitude and longitude to U.S. state using geospatial lookup."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -14,6 +14,8 @@ classifiers = [
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.dynamic]
+version = { attr = "latlng_to_state.__version__" }
 
 [tool.setuptools.package-data]
 "latlng_to_state.datasets.data" = ["*.parquet"]
