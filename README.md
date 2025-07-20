@@ -86,6 +86,10 @@ Loads the built-in U.S. state geometry data as a `GeoDataFrame`.
 The package includes:
 - A U.S. state geometry dataset (in `parquet` format) bundled under `latlng_to_state/datasets/data`.
 
+## 💡 Data Source Disclosure
+
+The U.S. state geometries and zipcode centroid data included in this package are sourced from the U.S. Census Bureau and are in the public domain. While efforts have been made to ensure data accuracy, this package is provided "as is" without any warranties. Users should verify the data suitability for their specific applications.
+
 ---
 
 ## 📦 Dependencies
