@@ -1,5 +1,5 @@
 from importlib import resources
-import geopandas as gpd 
+import geopandas as gpd
 
 DATA_MODULE = "latlng_to_state.datasets.data"
 
@@ -15,8 +15,8 @@ def load_parquet_file(
 
 
 def load_us_geometry():
-  
+
     data_file_name = "test_state.parquet"
-    data = load_parquet_file(data_file_name=data_file_name) 
+    data = load_parquet_file(data_file_name=data_file_name)
 
     return data

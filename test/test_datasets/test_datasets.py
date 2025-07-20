@@ -24,4 +24,5 @@ def test_load_parquet_file_missing_file_raises():
 
 def test_load_parquet_file_invalid_module_raises():
     with pytest.raises(ModuleNotFoundError):
-        load_parquet_file("test_state.parquet", data_module="invalid.module.name")
+        load_parquet_file("test_state.parquet"
+            , data_module="invalid.module.name")

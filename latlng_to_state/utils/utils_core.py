@@ -1,5 +1,5 @@
 import geopandas as gpd
-import pandas as pd 
+import pandas as pd
 from shapely.geometry import Point
 from typing import Optional
 
@@ -41,5 +41,3 @@ def _point_intersects_geometry(
     if not result.empty:
         return result.iloc[0]
     return None
-
-

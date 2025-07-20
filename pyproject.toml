@@ -19,3 +19,7 @@ version = { attr = "latlng_to_state.__version__" }
 
 [tool.setuptools.package-data]
 "latlng_to_state.datasets.data" = ["*.parquet"]
+
+[tool.linit.ruff]
+select = ["E", "F", "W"]
+line-length = 80

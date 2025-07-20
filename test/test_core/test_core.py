@@ -18,22 +18,26 @@ def sample_gdf():
 
 def test_lookup_contain_match(sample_gdf):
     lat, lng = 0.5, 0.5
-    result = lookup_geometry_by_point(lat, lng, sample_gdf, check_type="contain", return_col="NAME")
+    result = lookup_geometry_by_point(
+        lat, lng, sample_gdf, check_type="contain", return_col="NAME")
     assert result == "A"
 
 def test_lookup_intersect_match(sample_gdf):
     lat, lng = 0.0, 0.5  # On the edge of Square A
-    result = lookup_geometry_by_point(lat, lng, sample_gdf, check_type="intersect", return_col="NAME")
+    result = lookup_geometry_by_point(
+        lat, lng, sample_gdf, check_type="intersect", return_col="NAME")
     assert result == "A"
 
 def test_lookup_fallback_to_intersect(sample_gdf):
     lat, lng = 0.0, 0.5  # Not within, but intersects
-    result = lookup_geometry_by_point(lat, lng, sample_gdf, check_type=None, return_col="NAME")
+    result = lookup_geometry_by_point(
+        lat, lng, sample_gdf, check_type=None, return_col="NAME")
     assert result == "A"
 
 def test_lookup_no_match(sample_gdf):
     lat, lng = 10.0, 10.0
-    result = lookup_geometry_by_point(lat, lng, sample_gdf, check_type="contain", return_col="NAME")
+    result = lookup_geometry_by_point(
+        lat, lng, sample_gdf, check_type="contain", return_col="NAME")
     assert result is None
 
 def test_invalid_lat_raises(sample_gdf):
@@ -52,9 +56,11 @@ def test_missing_return_col_raises(sample_gdf):
 def test_missing_geometry_column_raises():
     df = pd.DataFrame({"NAME": ["A", "B"]})  # No geometry column
     gdf = gpd.GeoDataFrame(df)
-    with pytest.raises(ValueError, match="must contain at least one geometry column"):
+    with pytest.raises(ValueError
+            , match="must contain at least one geometry column"):
         lookup_geometry_by_point(0.5, 0.5, gdf)
 
 def test_none_geodataframe_raises():
-    with pytest.raises(AttributeError):  # Because gdf is None, calling `select_dtypes` fails
+    # Because gdf is None, calling `select_dtypes` fails
+    with pytest.raises(AttributeError):
         lookup_geometry_by_point(0.5, 0.5, None)

@@ -2,7 +2,10 @@ import pytest
 import geopandas as gpd
 from shapely.geometry import Polygon
 
-from latlng_to_state.utils.utils_core import _point_within_geometry, _point_intersects_geometry
+from latlng_to_state.utils.utils_core import (
+    _point_within_geometry
+    , _point_intersects_geometry
+)
 
 @pytest.fixture
 def sample_gdf():
@@ -30,7 +33,8 @@ def test_point_within_geometry_none(sample_gdf):
     assert result is None
 
 def test_point_intersects_geometry_match(sample_gdf):
-    # Point on the edge of SquareOne — should not be 'within' but will 'intersect'
+    # Point on the edge of SquareOne — should not be 'within'
+    # but will 'intersect'
     lat, lng = 0.0, 0.5
     result = _point_intersects_geometry(lat, lng, sample_gdf)
     assert result is not None
