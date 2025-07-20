@@ -9,7 +9,7 @@ from latlng_to_state.utils.utils_core import _point_within_geometry, _point_inte
 def lookup_geometry_by_point(
     lat: float,
     lng: float,
-    gdf: Optional[gpd.GeoDatasFrame],
+    gdf: Optional[gpd.GeoDataFrame],
     check_type: Optional[str] = None,
     return_col: str = "NAME",
 ) -> Optional[Union[str, int, float]]:
