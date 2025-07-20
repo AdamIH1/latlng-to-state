@@ -3,13 +3,13 @@ import geopandas as gpd
 import pandas as pd 
 from shapely.geometry import Point
 from typing import Optional, Union
-from utils.utils_core import _point_within_geometry, _point_intersects_geometry
+from latlng_to_state.utils.utils_core import _point_within_geometry, _point_intersects_geometry
 
 
 def lookup_geometry_by_point(
     lat: float,
     lng: float,
-    gdf: Optional[gpd.GeoDataFrame],
+    gdf: Optional[gpd.GeoDatasFrame],
     check_type: Optional[str] = None,
     return_col: str = "NAME",
 ) -> Optional[Union[str, int, float]]:

@@ -41,3 +41,5 @@ def _point_intersects_geometry(
     if not result.empty:
         return result.iloc[0]
     return None
+
+
