@@ -4,7 +4,6 @@ import geopandas as gpd
 DATA_MODULE = "latlng_to_state.datasets.data"
 
 
-
 def load_parquet_file(
     data_file_name,
     data_module=DATA_MODULE):
