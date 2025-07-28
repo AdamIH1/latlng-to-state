@@ -1,0 +1,39 @@
+[project]
+name = "latlng_to_state"
+dynamic = ["version"]
+description = "Convert latitude and longitude to U.S. state using geospatial lookup."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+classifiers = [
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3", 
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+dependencies = [
+    "geopandas>=1.0.1",
+    "pandas>=2.0.3",
+    "pyarrow>=19.0.1", 
+    "shapely>=2.0.7"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+version = { attr = "latlng_to_state.__version__" }
+
+[tool.setuptools.package-data]
+"latlng_to_state.datasets.data" = ["*.parquet"]
+
+[tool.linit.ruff]
+select = ["E", "F", "W"]
+line-length = 80
