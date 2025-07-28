@@ -55,10 +55,6 @@ state_name = lookup_geometry_by_point(lat, lng, gdf, check_type="contain", retur
 print(state_name)  # Output: Texas
 ```
 
----
-
-## 🧠 API
-
 ### `lookup_geometry_by_point`
 
 ```python
