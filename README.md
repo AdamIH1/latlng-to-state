@@ -1,25 +1,38 @@
 # latlng-to-state
 
-**latlng-to-state** is a lightweight Python package that maps latitude/longitude points to U.S. state geometries using geospatial containment and intersection checks. It comes with built-in U.S. state polygon data (census), us zipcode centroid data (census), and works seamlessly with `GeoPandas` and `shapely`.
+**latlng-to-state** is a lightweight Python package for geospatial point-in-geometry analysis. It enables you to determine whether a given latitude/longitude point falls within or intersects any polygon geometry — such as U.S. states or other regions.
+
+The package includes built-in datasets for:
+- 🗺️ U.S. state geometries (from U.S. Census)
+- 📍 U.S. ZIP code centroids (from U.S. Census)
+
+It works seamlessly with `GeoPandas` and `shapely`, making it easy to integrate spatial logic into data pipelines, geocoding workflows, and location-based applications.
 
 ---
 
 ## 🔧 Features 
 
 - 🗺️ **Spatial Lookup**: Determine if a lat/lng point is contained within or intersects with a polygon (e.g., a U.S. state).
-- 📦 **Built-in Data**: Includes preloaded U.S. state geometries (as a `.parquet` file).
+- 📦 **Built-in Data**: Includes preloaded U.S. state geometries and U.S zip codes (as a `.parquet` file).
 - 🧪 **Clean API**: Simple utility functions for integrating geospatial logic into your own workflows.
 - 🧱 **Modular Design**: Organized into utilities and core logic for easy extension.
 
 ---
 
-## 📦 Installation
+## 📦 Installation & Dependencies
 
 ```bash
 pip install latlng-to-state
 ```
 
-> Note: Requires Python ≥ 3.9
+> Requires Python ≥ 3.9
+
+This will automatically install the necessary dependencies, including:
+
+- `geopandas`
+- `shapely`
+- `pandas`
+- `pyarrow`
 
 ---
 
@@ -89,20 +102,6 @@ The package includes:
 ## 💡 Data Source Disclosure
 
 The U.S. state geometries and zipcode centroid data included in this package are sourced from the U.S. Census Bureau and are in the public domain. While efforts have been made to ensure data accuracy, this package is provided "as is" without any warranties. Users should verify the data suitability for their specific applications.
-
----
-
-## 📦 Dependencies
-
-- `geopandas`
-- `shapely`
-- `pandas`
-
-Install automatically via pip, or add them manually if needed:
-
-```bash
-pip install geopandas shapely pandas
-```
 
 ---
 

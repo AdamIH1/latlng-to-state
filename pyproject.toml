@@ -18,9 +18,9 @@ classifiers = [
 ]
 
 dependencies = [
-    "geopandas>=1.0.0",
-    "pandas>=2.3.1",
-    "pyarrow>=21.0.0", 
+    "geopandas>=1.0.1",
+    "pandas>=2.0.3",
+    "pyarrow>=19.0.1", 
     "shapely>=2.0.7"
 ]
 
