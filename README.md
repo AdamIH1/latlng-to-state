@@ -40,17 +40,17 @@ This will automatically install the necessary dependencies, including:
 
 ```python
 import geopandas as gpd
-from latlng_to_state.datasets import load_us_geometry
+from latlng_to_state.datasets import load_us_state_geometry
 from latlng_to_state.core.lookup import lookup_geometry_by_point
 
 # Load built-in U.S. state geometries
-gdf = load_us_geometry()
+gdf = load_us_state_geometry()
 
 # Sample lat/lng in Texas
 lat, lng = 31.9686, -99.9018
 
 # Lookup state name
-state_name = lookup_geometry_by_point(lat, lng, gdf, check_type="contain", return_col="NAME")
+state_name = lookup_geometry_by_point(lat, lng, gdf, check_type="contain", return_col="state")
 
 print(state_name)  # Output: Texas
 ```
@@ -78,10 +78,10 @@ Returns the matched value from the `return_col` column, or `None` if no match.
 
 ---
 
-### `load_us_geometry`
+### `load_us_state_geometry`
 
 ```python
-from latlng_to_state.datasets import load_us_geometry
+from latlng_to_state.datasets import load_us_state_geometry
 
 gdf = load_us_geometry()
 ```
@@ -93,7 +93,7 @@ Loads the built-in U.S. state geometry data as a `GeoDataFrame`.
 ## 📁 Included Data
 
 The package includes:
-- A U.S. state geometry dataset (in `parquet` format) bundled under `latlng_to_state/datasets/data`.
+- A U.S. state geometry and U.S. zipcode centroid dataset (in `parquet` format) bundled under `latlng_to_state/datasets/data`.
 
 ## 💡 Data Source Disclosure
 

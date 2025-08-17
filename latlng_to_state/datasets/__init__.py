@@ -1,7 +1,11 @@
-from ._base import load_us_geometry
+from ._base import (
+    load_us_state_geometry
+    , load_us_zipcode_centroid
+)
 
 __all__ = [
-    "load_us_geometry"
+    "load_us_state_geometry"
+    , "load_us_zipcode_centroid"
 ]
 def __getattr__(name):
     try:
