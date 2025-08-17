@@ -1,6 +1,6 @@
 # latlng-to-state
 
-**latlng-to-state** is a lightweight Python package for geospatial point-in-geometry analysis. It enables you to determine whether a given latitude/longitude point falls within or intersects any polygon geometry — such as U.S. states or other regions.
+Quickly find U.S. states or regions from latitude/longitude coordinates using built-in geospatial data. **latlng-to-state** is a lightweight Python package for geospatial point-in-geometry analysis. It enables you to determine whether a given latitude/longitude point falls within or intersects any polygon geometry — such as U.S. states or other regions.
 
 The package includes built-in datasets for:
 - 🗺️ U.S. state geometries (from U.S. Census)
@@ -81,9 +81,12 @@ Returns the matched value from the `return_col` column, or `None` if no match.
 ### `load_us_state_geometry`
 
 ```python
-from latlng_to_state.datasets import load_us_state_geometry
+from latlng_to_state.datasets import (
+    load_us_state_geometry
+    , load_us_zipcode_centroid
+)
 
-gdf = load_us_geometry()
+gdf = load_us_state_geometry()
 ```
 
 Loads the built-in U.S. state geometry data as a `GeoDataFrame`.
