@@ -12,7 +12,7 @@ def lookup_geometry_by_point(
     lng: float,
     gdf: Optional[gpd.GeoDataFrame],
     check_type: Optional[str] = None,
-    return_col: str = "NAME",
+    return_col: str = "state",
 ) -> Optional[Union[str, int, float]]:
     """Looks up a value from a GeoDataFrame based on a lat/lng point.
 

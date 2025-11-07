@@ -1,11 +1,11 @@
 import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point
-from typing import Optional
+from typing import Union
 
 def _point_within_geometry(
     lat: float, lng: float, gdf: gpd.GeoDataFrame
-) -> Optional[pd.Series]:
+) -> Union[pd.Series, None]:
     """Returns the first row where the point is strictly within a geometry.
 
     Args:
@@ -25,7 +25,7 @@ def _point_within_geometry(
 
 def _point_intersects_geometry(
     lat: float, lng: float, gdf: gpd.GeoDataFrame
-) -> Optional[pd.Series]:
+) -> Union[pd.Series, None]:
     """Returns the first row where the point intersects a geometry.
 
     Args:
