@@ -28,6 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
+          pip install .
           pip install pytest coverage
       - name: Run tests with coverage
         run: |
