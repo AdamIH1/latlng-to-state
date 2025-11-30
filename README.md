@@ -15,6 +15,8 @@ The package includes built-in datasets for:
 
 It works seamlessly with `GeoPandas` and `shapely`, making it easy to integrate spatial logic into data pipelines, geocoding workflows, and location-based applications.
 
+> **Disclaimer:** This repository is primarily for tutorial and example purposes, demonstrating PyPI package development and GitHub Actions workflows.
+
 ---
 
 ## 🔧 Features 
