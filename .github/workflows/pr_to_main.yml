@@ -1,85 +1,67 @@
 name: PR To Main From Branch
-
 on:
   pull_request:
     branches:
       - main
-
 jobs:
   lint:
     name: Ruff Lint Checks
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install Ruff
         run: |
           python -m pip install --upgrade pip
           pip install ruff
-
       - name: Run Ruff checks
         run: |
           ruff check .
-
   unit_test:
     name: Unit Tests in branch
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'  
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest coverage
-
-    - name: Run tests with coverage
-      run: |
-        coverage run -m pytest
-        coverage report
-        coverage html
-
-    - name: Upload coverage report (HTML)
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-html-report
-        path: htmlcov  
-
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest coverage
+      - name: Run tests with coverage
+        run: |
+          coverage run -m pytest
+          coverage report
+          coverage html
+      - name: Upload coverage report (HTML)
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html-report
+          path: htmlcov
   deploy_flag_check:
     name: Check Deploy Flag
     runs-on: ubuntu-latest
     needs:
       - lint
       - unit_test
-
     outputs:
       deploy_enabled: ${{ steps.deploy_flag_check_.outputs.deploy_enabled }}
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Run deploy flag check
         id: deploy_flag_check_
         run: |
           python scripts/check_deployment.py
-
   check_test_pypi:
     name: Check Test PyPI Version
     runs-on: ubuntu-latest
@@ -87,26 +69,20 @@ jobs:
       - lint
       - unit_test
       - deploy_flag_check
-
     if: ${{ needs.deploy_flag_check.outputs.deploy_enabled == 'true' }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install version checker dependencies
         run: |
           python -m pip install --upgrade pip
           pip install packaging
-
       - name: Run version check
         run: python scripts/check_pypi_version.py --test --stage deployed
-
   check_prod_pypi:
     name: Check Prod PyPI Version
     runs-on: ubuntu-latest
@@ -114,22 +90,17 @@ jobs:
       - lint
       - unit_test
       - deploy_flag_check
-
     if: ${{ needs.deploy_flag_check.outputs.deploy_enabled == 'true' }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install version checker dependencies
         run: |
           python -m pip install --upgrade pip
           pip install packaging
-
       - name: Run version check
         run: python scripts/check_pypi_version.py --prod --stage deploying

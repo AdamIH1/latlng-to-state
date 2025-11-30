@@ -1,18 +1,13 @@
-name: Branch Development 
-
+name: Branch Development
 on:
   workflow_dispatch:
-
-
 permissions:
-  id-token: write      
+  id-token: write
   contents: read
-  issues: write       
-
+  issues: write
 jobs:
   enforce-not-main-only:
     runs-on: ubuntu-latest
-
     steps:
       - name: Fail if on main
         if: github.ref == 'refs/heads/main'
@@ -20,88 +15,68 @@ jobs:
           echo "❌ This workflow CANNOT run on the main branch."
           echo "Current branch: ${{ github.ref }}"
           exit 1
-
       - name: Continue if NOT main
         if: github.ref != 'refs/heads/main'
         run: |
           echo "✔ Branch is NOT main. Continuing..."
           echo "Current branch: ${{ github.ref }}"
-  
   lint:
     name: Ruff Lint Checks
     runs-on: ubuntu-latest
-    needs: 
+    needs:
       - enforce-not-main-only
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Install Ruff
         run: |
           pip install --upgrade pip ruff
-
       - name: Run Ruff checks
         run: ruff check .
-
-
   unit_test:
     name: Unit Tests
     runs-on: ubuntu-latest
-    needs: 
+    needs:
       - enforce-not-main-only
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Install dependencies
         run: |
           pip install --upgrade pip
           pip install pytest coverage
           pip install .
-
       - name: Run tests with coverage
         run: |
           coverage run -m pytest
           coverage report
           coverage html
-
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-html-report
           path: htmlcov
-
   deploy_flag_check:
     name: Check Deploy Flag
     runs-on: ubuntu-latest
     needs:
       - lint
       - unit_test
-
     outputs:
       deploy_enabled: ${{ steps.deploy_flag_check.outputs.deploy_enabled }}
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Run deploy flag check
         id: deploy_flag_check
         run: |
           python scripts/check_deployment.py
-
-
   check_test_pypi:
     name: Check TestPyPI Version
     runs-on: ubuntu-latest
@@ -109,29 +84,21 @@ jobs:
       - lint
       - unit_test
       - deploy_flag_check
-
     if: ${{ needs.deploy_flag_check.outputs.deploy_enabled == 'true' }}
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Install version checker dependencies
         run: |
           pip install --upgrade pip packaging
-
       - name: Run version check
         run: python scripts/check_pypi_version.py --test --stage deploying
-
-
   manual_approval:
     name: Manual Approval Before Deploy
     runs-on: ubuntu-latest
     needs: [check_test_pypi]
-
     steps:
       - name: Await Manual Approval
         uses: trstringer/manual-approval@v1
@@ -141,34 +108,26 @@ jobs:
           minimum-approvals: 1
           issue-title: "Approve Deployment to TestPyPI"
           issue-body: "Approve deployment to TestPyPI for this branch."
-
-
   publish_test_pypi:
     name: Publish to TestPyPI
     needs: [manual_approval]
     runs-on: ubuntu-latest
     environment: pypi_test
-
     permissions:
       id-token: write
       contents: read
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Install build tools
         run: |
           pip install --upgrade pip
           pip install build
-
       - name: Build Package
         run: python -m build
-
       - name: Publish to TestPyPI (Trusted Publishing)
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
