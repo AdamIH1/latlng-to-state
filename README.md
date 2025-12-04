@@ -5,6 +5,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
+[![PyPI - Downloads](https://static.pepy.tech/badge/latlng-to-state)](https://pepy.tech/project/latlng-to-state)
+
 #
 
 Quickly find U.S. states or regions from latitude/longitude coordinates using built-in geospatial data. **latlng-to-state** is a lightweight Python package for geospatial point-in-geometry analysis. It enables you to determine whether a given latitude/longitude point falls within or intersects any polygon geometry — such as U.S. states or other regions.
