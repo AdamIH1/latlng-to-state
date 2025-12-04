@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-[![PyPI - Downloads](https://static.pepy.tech/badge/latlng-to-state)](https://pepy.tech/project/latlng-to-state)
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/latlng-to-state?period=total&units=ABBREVIATION&left_color=GREY&right_color=BRIGHTGREEN&left_text=downloads)](https://pepy.tech/projects/latlng-to-state)
 
 #
 
